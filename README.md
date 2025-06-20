@@ -36,7 +36,7 @@
 ## 2. 전체 기술 구조 (Network + API)
 
 ```mermaid
-flowchart LR
+flowchart TB
     subgraph LAN["🏢 내부망"]
         PC["👩‍💻 사용자 PC<br/>(파일 제출)"]
         PROXY["🖥️ Proxy 서버<br/>PowerShell Engine"]
@@ -48,12 +48,12 @@ flowchart LR
         MIP["🔒 MIP 서비스<br/>RMS 암호화"]
     end
 
-    %% 흐름
+    %% 흐름 (위→아래 방향)
     PC --> PROXY
     PROXY -- "1️⃣ Token 요청" --> AAD
     PROXY -- "2️⃣ 업로드<br/>(PUT 또는 Upload Session)" --> DRIVE
     PROXY -- "3️⃣ assignSensitivityLabel" --> DRIVE
-    DRIVE -- "라벨 · 암호화 메타" --> MIP
+    DRIVE -- "라벨·암호화 메타" --> MIP
     PROXY -- "4️⃣ 다운로드<br/>(GET 또는 Stream)" --> DRIVE
     PROXY -- "5️⃣ (선택) SDK 복호화" --> PC
 ```
